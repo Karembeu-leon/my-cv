@@ -4,50 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gardiner Nyambane - Personal CV</title>
-      <p>
-   <H1 id="animated-text">Gardiner Nyambane</H1>
-  </p> 
-</head>
-<style> 
-   image{
-      width:150px;
-      height: 150px;
-      border-radius: 50%;
-      image-align: center;
-   
-   }
-   #animated-text span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-   }
+    <style> 
+       /* General Reset & Layout */
+       body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+       }
+       
+       nav a {
+          margin: 0 10px;
+          text-decoration: none;
+          color: #333;
+          font-weight: bold;
+       }
 
-   #animated-text.visible span.reveal{
-      opacity: 1;
-      transform: translateY(0);
-   }
+       .profile-picture img {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          display: block;
+          margin: 20px auto; 
+          object-fit: cover; 
+       }
+       
+       /* Elements start shifted 30px to the right and completely invisible */
+       #animated-text span {
+          display: inline-block;
+          opacity: 0;
+          transform: translateX(30px); 
+          transition: opacity 0.4s ease, transform 0.4s ease;
+          white-space: pre; /* Preserves spaces between words */
+       }
 
-</style>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        div.profile-picture {
-            text-align: left;
-            margin-bottom: 10px;
-            width: 10px;
-        }
+       /* Elements slide left to their original position and fade in */
+       #animated-text.visible span.reveal {
+          opacity: 1;
+          transform: translateX(0); 
+       }
+
+       .button {
+          display: inline-block;
+          margin-top: 15px;
+          padding: 10px 20px;
+          background-color: #007BFF;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+       }
     </style>
 </head>
-<div class="profile-picture">
-            <img src="gard.jpg" alt="Gardiner nyambane">
-        </div>
-
 <body>
 
 <header>
-    <h1>Gardiner Nyambane</h1>
-    <p>Information Technology Student</p>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="personal.details.html">Personal Details</a>
@@ -60,15 +70,21 @@
 </header>
 
 <main>
+    <div class="profile-picture">
+        <img src="gard.jpg" alt="Gardiner nyambane">
+    </div>
+    
+    <!-- The JavaScript below will split this text into individual animated characters -->
+    <h1 id="animated-text">HI I AM GARDINER NYAMBANE</h1>
+    <p>Information Technology Student</p>   
+
     <section class="home">
         <h2>Welcome to My Personal CV</h2>
-
         <p>
             Hello! My name is Gardiner Nyambane. I am an Information Technology
             student interested in web development, programming, data management
             and data analytics.
         </p>
-
         <a class="button" href="profile.html">View My Profile</a>
     </section>
 </main>
@@ -76,6 +92,32 @@
 <footer>
     <p>&copy; 2026 Gardiner Nyambane. All Rights Reserved.</p>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const textContainer = document.getElementById("animated-text");
+        const textStr = textContainer.textContent;
+        textContainer.textContent = ""; // Clear original text
+
+        // Break text into individual letters wrapped in spans
+        for (let i = 0; i < textStr.length; i++) {
+            const span = document.createElement("span");
+            span.textContent = textStr[i];
+            textContainer.appendChild(span);
+        }
+
+        // Add class to trigger container block layout
+        textContainer.classList.add("visible");
+
+        // Reveal letters one by one with a staggered delay
+        const spans = textContainer.querySelectorAll("span");
+        spans.forEach((span, index) => {
+            setTimeout(() => {
+                span.classList.add("reveal");
+            }, index * 50); // 50ms delay multiplier per letter
+        });
+    });
+</script>
 
 </body>
 </html>
