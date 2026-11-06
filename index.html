@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gardiner Nyambane - Personal CV</title>
+      <p>
+   <H1 id="animated-text">Gardiner Nyambane</H1>
+  </p> 
+</head>
+<style> 
+   image{
+      width:150px;
+      height: 150px;
+      border-radius: 50%;
+      image-align: center;
+   
+   }
+   #animated-text span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+   }
+
+   #animated-text.visible span.reveal{
+      opacity: 1;
+      transform: translateY(0);
+   }
+
+</style>
     <link rel="stylesheet" href="style.css">
     <style>
         div.profile-picture {
