@@ -4,120 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gardiner Nyambane - Personal CV</title>
-    <style> 
-       /* General Reset & Layout */
-       body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 20px;
-          text-align: center;
-       }
-       
-       nav a {
-          margin: 0 10px;
-          text-decoration: none;
-          color: #333;
-          font-weight: bold;
-       }
+    <style>
+        /* General Reset & Layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 20px auto;
+            object-fit: cover;
+        }
 
-       .profile-picture img {
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          display: block;
-          margin: 20px auto; 
-          object-fit: cover; 
-       }
-       
-       /* Elements start shifted 30px to the right and completely invisible */
-       #animated-text span {
-          display: inline-block;
-          opacity: 0;
-          transform: translateX(30px); 
-          transition: opacity 0.4s ease, transform 0.4s ease;
-          white-space: pre; /* Preserves spaces between words */
-       }
+        /* Span characters setup */
+        #animated-text span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(30px);
+            /* Assign the custom CSS delay variable and trigger the infinite animation loop */
+            animation: letterReveal 4s var(--delay) infinite ease-in-out;
+        }
 
-       /* Elements slide left to their original position and fade in */
-       #animated-text.visible span.reveal {
-          opacity: 1;
-          transform: translateX(0); 
-       }
+        /* 
+           CSS Keyframe Loop: 
+           0% to 10% - Invisible & shifted right
+           15% to 75% - Fully visible in place (holds your text on screen)
+           80% to 100% - Fades out & resets
+        */
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            15%, 75% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            80%, 100% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+        }
 
-       .button {
-          display: inline-block;
-          margin-top: 15px;
-          padding: 10px 20px;
-          background-color: #007BFF;
-          color: white;
-          text-decoration: none;
-          border-radius: 5px;
-       }
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="personal.details.html">Personal Details</a>
+            <a href="profile.html">Profile</a>
+            <a href="education.html">Education</a>
+            <a href="skills.html">Skills</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <div class="profile-picture">
+            <img src="gard.jpg" alt="Gardiner nyambane">
+        </div>
+        
+        <!-- The JavaScript below will split this text into individual animated characters -->
+        <h1 id="animated-text">HI I AM GARDINER NYAMBANE</h1>
+        <p>Information Technology Student</p>
+        
+        <section class="home">
+            <h2>Welcome to My Personal CV</h2>
+            <p>
+                Hello! My name is Gardiner Nyambane. I am an Information Technology student interested in web development, programming, data management and data analytics.
+            </p>
+            <a class="button" href="profile.html">View My Profile</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Gardiner Nyambane. All Rights Reserved.</p>
+    </footer>
 
-<header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="personal.details.html">Personal Details</a>
-        <a href="profile.html">Profile</a>
-        <a href="education.html">Education</a>
-        <a href="skills.html">Skills</a>
-        <a href="experience.html">Experience</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const textContainer = document.getElementById("animated-text");
+            const textStr = textContainer.textContent;
+            textContainer.textContent = ""; // Clear original text
 
-<main>
-    <div class="profile-picture">
-        <img src="gard.jpg" alt="Gardiner nyambane">
-    </div>
-    
-    <!-- The JavaScript below will split this text into individual animated characters -->
-    <h1 id="animated-text">HI I AM GARDINER NYAMBANE</h1>
-    <p>Information Technology Student</p>   
-
-    <section class="home">
-        <h2>Welcome to My Personal CV</h2>
-        <p>
-            Hello! My name is Gardiner Nyambane. I am an Information Technology
-            student interested in web development, programming, data management
-            and data analytics.
-        </p>
-        <a class="button" href="profile.html">View My Profile</a>
-    </section>
-</main>
-
-<footer>
-    <p>&copy; 2026 Gardiner Nyambane. All Rights Reserved.</p>
-</footer>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const textContainer = document.getElementById("animated-text");
-        const textStr = textContainer.textContent;
-        textContainer.textContent = ""; // Clear original text
-
-        // Break text into individual letters wrapped in spans
-        for (let i = 0; i < textStr.length; i++) {
-            const span = document.createElement("span");
-            span.textContent = textStr[i];
-            textContainer.appendChild(span);
-        }
-
-        // Add class to trigger container block layout
-        textContainer.classList.add("visible");
-
-        // Reveal letters one by one with a staggered delay
-        const spans = textContainer.querySelectorAll("span");
-        spans.forEach((span, index) => {
-            setTimeout(() => {
-                span.classList.add("reveal");
-            }, index * 50); // 50ms delay multiplier per letter
+            // Break text into individual letters wrapped in spans
+            for (let i = 0; i < textStr.length; i++) {
+                const span = document.createElement("span");
+                
+                // Fix space width collapse
+                if (textStr[i] === " ") {
+                    span.innerHTML = "&nbsp;";
+                } else {
+                    span.textContent = textStr[i];
+                }
+                
+                // Dynamically feed the index delay into CSS custom variables
+                span.style.setProperty('--delay', `${i * 0.05}s`);
+                
+                textContainer.appendChild(span);
+            }
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
